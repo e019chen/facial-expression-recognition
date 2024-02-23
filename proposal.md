@@ -79,7 +79,7 @@ Our Gantt Chart can be found [here](https://github.com/e019chen/ML-Facial-Expres
 | Name | Proposal Contributions |
 | ---- | ---------------------- |
 | Andrew G. | Methods, Github Pages, Presentation |
-| Andrew H. | Methods, Presentation |
+| Andrew H. | Methods, Presentation, Slides |
 | Chris | Introduction, Problem Definition, Presentation |
 | Edison | Methods, Presentation |
 | Euan | Results, Gantt Chart, Presentation |
