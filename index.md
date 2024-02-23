@@ -5,4 +5,4 @@
 layout: home
 ---
 
-The link to our proposal can be found [here]({% link proposal.md %})
+The link to our proposal can be found [here](https://e019chen.github.io/ML-Facial-Expression-Recognition/proposal/)
