@@ -5,4 +5,4 @@
 layout: home
 ---
 
-The link to our proposal can be found [here](/proposal)
+The link to our proposal can be found [here]({% link proposal.md %})
