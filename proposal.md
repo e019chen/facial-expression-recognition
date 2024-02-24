@@ -4,13 +4,15 @@ title: Proposal
 permalink: /proposal/
 ---
 
-## Introduction/Background
+## Background
 
 #### Introduction
-Facial expression classification has been an important problem in ML and CV ever since the inception of both fields. Recognizing facial emotions has always been a subjective, time-consuming, and strictly human task. Well-designed ML models that can predict facial expressions, emotions, and attitudes from just a snapshot of a face have the potential to optimize processes in the realms of human-computer interaction, psychology, security, and marketing.
+Facial expression classification has been an important problem in ML and CV ever since the inception of both fields. Well-designed models that can predict facial emotions (a previously human-task) have the potential to optimize processes in the realms of human-computer interaction, psychology, security, and marketing.
 
 #### Literature Review
-Artificial neural networks have been trained on data extracted from the Facial Action Coding System (FACS) to classify facial expressions based on the individual movements of specific muscle groups [1]. FACS extracts muscle movements from image headshots, which are then fed into the neural net. Others have directly fed facial images into CNNs after facial detection and background removal [2]. There have also been comparisons between classical machine learning models compared to newer deep learning models [3].
+* Artificial neural networks have been trained on data extracted from the Facial Action Coding System to classify emotions based on the movements of specific muscle groups [1]. 
+* Facial images have been fed directly into CNNs after image preprocessing [2]. 
+* The effectiveness of classical ML models compared to newer deep learning models has been studied [3].
 
 #### Benchmarks
 
@@ -21,37 +23,36 @@ Artificial neural networks have been trained on data extracted from the Facial A
 
 #### Datasets
 
-| Dataset (Linked) | Datapoints |
+| Dataset (Linked) | Labeled Datapoints |
 | ------- | --------------------- | -------- |
-| [AffectNet](http://mohammadmahoor.com/affectnet/) | > 400,000 |
-| [RAF_DB](http://www.whdeng.cn/raf/model1.html#dataset)    | > 30,000  |
-| [Kaggle Face Expression Recognition](https://www.kaggle.com/datasets/jonathanoheix/face-expression-recognition-dataset/) | > 10,000 |
-
+| [AffectNet](http://mohammadmahoor.com/affectnet/) | 400,000+ |
+| [RAF_DB](http://www.whdeng.cn/raf/model1.html#dataset)    | 30,000+  |
+| [Kaggle Face Expression Recognition](https://www.kaggle.com/datasets/jonathanoheix/face-expression-recognition-dataset/) | 10,000+ |
 
 
 ## Problem Definition
 Problem: Classifying human face expressions is difficult, subjective, and time-consuming, but is incredibly useful in many fields such as:
-* Psychology: Mental health diagnostics and treatment by detecting subtle signs of negative emotional outlooks.
-* Security and Justice: Analyze emotions during testimonies to predict criminal intent, testimonial legitimacy, or suspicious behaviors.
-* Marketing: Assess marketing performance and advertising effectiveness, or fine tune targeted advertising campaigns to ensure positive emotional responses.
+* Psychology: Mental health diagnostics by detecting signs of negative emotional outlooks.
+* Security and Justice: Analyze emotions during testimonies to predict criminal intent or suspicious behaviors.
+* Marketing: Assess performance and advertising effectiveness, or fine tune targeted campaigns to reinforce positive emotions.
 
 
 ## Methods
 #### Data Preprocessing Methods
-1. Gaussian Blur: Effectively reduce noise by applying a Gaussian kernel on the image, discarding unwanted information that may impair the performances of machine learning models
-2. Sobel Edge Detection: Effectively captures the edges, regions with high spatial frequency, in the image using a Sobel operator (a kind of convolutional kernel), extracting essential facial features for the classification task.
-3. Histogram of Oriented Gradient ([skimage.feature.hog](https://scikit-image.org/docs/stable/auto_examples/features_detection/plot_hog.html)): Captures image features by utilizing the frequency of gradients and their orientation. This is effective for localized edge detection which helps identify key features such as eyes and mouth.
-4. Image augmentation: Stretch and rotate the existing dataset to increase model robustness and accuracy.
+1. **Gaussian Blur**: Reduce noise by applying a Gaussian kernel on the image, discarding unwanted information that may impair the performances of ML models
+2. **Sobel Edge Detection**: Capture the edges and regions with high spatial frequency in the image using a Sobel operator (a convolutional kernel), extracts essential facial features for classification.
+3. **Histogram of Oriented Gradient** ([skimage.feature.hog](https://scikit-image.org/docs/stable/auto_examples/features_detection/plot_hog.html)): Captures image features by utilizing the frequency of gradients and their orientation. Effective for localized edge detection to identify key face features (eyes/mouth).
+4. **Image Augmentation**: Stretch and rotate to increase model robustness and accuracy.
 
 #### ML Algorithms/Models
-1. Convolutional Neural Networks: A popular approach for image recognition. It utilizes the structure of a neural network and applies a kernel on each convolutional layer to detect patterns within images. Effective due to the ability to model complex non-linear relationships.
-2. Support Vector Machine: Find the optimal hyperplane that differentiates image classes in the feature space. Effective in image classification tasks due to its ability to cope with high-dimensional data, like images. 
-3. Multinomial Logistic Regression ([sklearn.linear_model.LogisticRegression](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html)): Multinomial Logistic Regression uses a sigmoid function to return the probability that a particular result belongs to a category. Maximum likelihood estimation can be used to optimize the model and minimize the cost. Effective at finding correlation of certain features and categories.
+1. **Convolutional Neural Networks**: A popular approach for image recognition. Applies a kernel on each convolutional layer in the NN to detect specific patterns. Can model complex non-linear relationships.
+2. **Support Vector Machine**: Finds the optimal hyperplane that differentiates image classes in the feature space. Effective in image classification due to its ability to cope with high-dimensional data.
+3. **Multinomial Logistic Regression** ([sklearn.linear_model.LogisticRegression](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html)): Uses a sigmoid function to return the probability of category membership. MLE can be used to optimize the model and minimize the cost. Effective at finding the correlation of certain features and categories.
 
 ## Results and Discussion
 
 #### Quantitative Metrics
-The following metrics will be used as defined in lecture:
+The following classification metrics will be used as defined in lecture:
 1. Accuracy
 2. Precision
 3. Recall
@@ -59,15 +60,15 @@ The following metrics will be used as defined in lecture:
 5. Confusion Matrix
 
 #### Project Goals
-* High overall accuracy. This shows the model has a high chance of correctly identifying facial expressions.
-* Balanced precision and recall for each facial expression category. This demonstrates the model’s ability to correctly identify each expression without false positives/negatives. 
-* Minimal bias. This ensures the model performs well regardless of the context (e.g. age, gender, ethnicity)
+* High overall accuracy. Shows a high chance of correctly identifying facial expressions.
+* Balanced precision and recall for each facial expression category. Demonstrates the ability to correctly identify each expression without false positives/negatives. 
+* Minimal bias. Ensures high performance regardless of the context (age, gender, ethnicity)
 
 
 #### Expected Results
-* Around 60~90% accuracy (lower using simpler models and higher using deep learning models such as CNN) [7]
-* Some expressions are inherently more difficult to recognize e.g. smile and smirk
-* Limitations under certain circumstances e.g. low-light
+* Around 60~90% accuracy (lower using simpler models and higher using deep learning models) [7]
+* However, some expressions are inherently harder to recognize (smile and smirk)
+* Image limitations (low-lighting, obstructed views)
 
 
 ## Gantt Chart
@@ -80,7 +81,7 @@ Our Gantt Chart can be found [here](https://github.com/e019chen/ML-Facial-Expres
 | ---- | ---------------------- |
 | Andrew G. | Methods, Github Pages, Presentation |
 | Andrew H. | Methods, Presentation, Slides |
-| Chris | Introduction, Problem Definition, Presentation |
+| Chris | Introduction, Literature Review, Problem Definition, Presentation |
 | Edison | Methods, Presentation |
 | Euan | Results, Gantt Chart, Presentation |
 
