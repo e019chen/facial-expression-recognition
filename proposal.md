@@ -31,7 +31,7 @@ Facial expression classification has been an important problem in ML and CV ever
 
 
 ## Problem Definition
-Problem: Classifying human face expressions is difficult, subjective, and time-consuming, but is incredibly useful in many fields such as:
+**Problem**: Classifying human face expressions is difficult, subjective, and time-consuming, but is incredibly useful in many fields such as:
 * Psychology: Mental health diagnostics by detecting signs of negative emotional outlooks.
 * Security and Justice: Analyze emotions during testimonies to predict criminal intent or suspicious behaviors.
 * Marketing: Assess performance and advertising effectiveness, or fine tune targeted campaigns to reinforce positive emotions.
@@ -67,7 +67,8 @@ The following classification metrics will be used as defined in lecture:
 
 #### Expected Results
 * Around 60~90% accuracy (lower using simpler models and higher using deep learning models) [7]
-* However, some expressions are inherently harder to recognize (smile and smirk)
+* Categorize seven expressions: angry, disgust, fear, happy, neutral, sad, surprise
+    * Some expressions harder to differentiate
 * Image limitations (low-lighting, obstructed views)
 
 
@@ -82,7 +83,7 @@ Our Gantt Chart can be found [here](https://github.com/e019chen/ML-Facial-Expres
 | Andrew G. | Methods, Github Pages, Presentation |
 | Andrew H. | Methods, Presentation, Slides |
 | Chris | Introduction, Literature Review, Problem Definition, Presentation |
-| Edison | Methods, Presentation |
+| Wei-Liang | Methods, Presentation |
 | Euan | Results, Gantt Chart, Presentation |
 
 
