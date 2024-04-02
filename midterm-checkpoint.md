@@ -62,7 +62,7 @@ The following image shows the layers used to create the model. The model archite
 * Dense (fully-connected) Layer: performs classification based on the features
 * Softmax: outputs the predicted probability distribution among different classes 
 
-TODO!!! INSERT IMAGE OF CNN MODEL
+![cnn_model](../images/cnn_model.png)
 
 ### Method 2 - Multinomial Logistic Regression (In Progress)
 #### Data Preprocessing
@@ -76,11 +76,16 @@ We pull out the first two principal components, which account for a combined 38.
 
 In the scatter plot, happy faces are purple and sad faces are yellow.
 
-TODO!!!! INSERT IMAGE OF PCA SCATTER PLOT
+![pca_raw](../images/pca_raw.png)
+
+**Explained Variance Ratio:** [0.28706147 0.09976334]
+
+**Total Explained Variance:** 0.3868248061313289
 
 From the visualization, It is clear that using just the two best features does not provide a clear difference between the happy and sad faces. That being said, we attempted PCA on the entire dataset with all seven classes using the best 10 principle components. This resulted in the following values for variance:
 
 **Explained Variance Ratio:** [0.28883101 0.09765254 0.09433207 0.0550939  0.03070064 0.02566376 0.02143845 0.01977265 0.01776848 0.01505705]
+
 **Total Explained Variance:** 0.6663105546417539
 
 It looks like with 10 features, we are at least able to capture the majority of variance. More testing will need to be done to find the optimal number of features needed and whether PCA is able to capture the important features. 
@@ -90,24 +95,28 @@ It looks like with 10 features, we are at least able to capture the majority of 
 
 In order to extract more useful features, histogram of oriented gradients was implemented to hopefully identify important facial features. HOG specializes in edge detection as well as orientation of the edges. With this in mind, the hope was that HOG would be able to detect specific facial features such as mouths and eyes as well as their orientation which could be used as an indicator of emotion. An example of HOG can be seen below.
 
-TODO!!!! INSERT IMAGE OF HOG ASTRONAUT
+![hog_demo](../images/hog_demo.png)
 
 From the picture on the left, all of the important edges are preserved as well as the orientation of the edges. However, when applied to our test dataset, it seems it does not do as well as seen below.
 
-TODO!!!! INSERT IMAGE OF HOG HAPPY
+![hog_happy](../images/hog_happy.png)
 
 It looks as if our images are too low resolution to provide enough information for HOG to process. Different block sizes were tried ranging from (2,2) pixels all the way up to (16,16) with orientations from 4 to 8, with little luck in capturing more information. The outline of the head is preserved, but it is very hard to tell any information about the eyes or mouth. That being said, with a block size of (4,4) pixels with 8 orientations, the number of features has gone down from 48x48=2304 to just 576.
 
 
 **MTCNN Facial Feature Detection**
 
-TODO!!!! INSERT IMAGE OF SAD AND HAPPY MOUTHS
+![mtcnn_demo](../images/mtcnn_demo.png)
 
 We continued to try to extrapolate the most important features of the image by extracting just the shape of the mouth to feed into the model. We made this decision because that's how alot of us discern a happy face from a sad one in real life. We isolated just the mouths of all faces using MTCNN (Multi-Task Cascaded Convolutional Neural Networks), which can pinpoint the location of certain facial features with very high accuracy. Looking at the images above, it is somewhat clear as to which faces are happy or sad based just off of the mouth.
 
 We used MTCNN to create a new array with just the pixels that correspond to a mouth from the smaller sample set of 1000 happy and 1000 sad faces. We then perform PCA again to attempt to plot the differences between the faces. While there still is no obvious difference, you can see that the happy faces (purple) are a bit more to the left and the sad faces (yellow) are a bit more to the right. This is a small improvement from using the whole face.
 
-TODO!!!! INSERT IMAGE OF PCA COVARIANCE
+![pca_mtcnn](../images/pca_mtcnn.png)
+
+**Explained Variance Ratio:** [0.46207603 0.11718947]
+
+**Total Explained Variance:** 0.5792655024259662
 
 #### ML Algorithm/Model
 For this method, we decided to try to implement Multinomial Logistic Regression, specifically using ridge regression to prevent overfitting. As with the data processing, we decided to start by only using two categories (happy and sad) with 1000 images each to see how logistic regression would perform. We attempted to fit a logistic regression model on all 2304 features to see if a discernible difference could be learned without much preprocessing. However, there is severe overfitting as we can see from the train accuracy of 100% and the test accuracy of 64.25%. This is most likely due to the fact that we did not have enough data points to have such a high number of features.
@@ -123,6 +132,10 @@ The last preprocessing method was to use MTCNN for facial feature detection to i
 ## Results and Discussion
 ### Method 1 - Convolutional Neural Network (CNN)  
 #### Visualizations and Quantitative Metrics
+![cnn_metrics](../images/cnn_metrics.png)
+
+![cnn_cm](../images/cnn_cm.png)
+
 #### Analysis
 The results and visualizations provided several insights into our CNN model’s performance. First, we observe that besides the loss, all validation metrics remain higher than the training metrics throughout the epochs. This may be due to the L2 regularizer we applied in the dense layer or adding the dropout layer. Both methods prevent overfitting by adding penalties only to the training loss. The model performs well in precision and AUROC. This suggests that the model is good at identifying positive cases among the predicted positives and distinguishing between the positive and negative classes across different thresholds. 
 
@@ -131,6 +144,30 @@ Also, in the confusion matrix, we can observe that in general, the matrix focuse
 
 ### Method 2 - Multinomial Logistic Regression (In Progress)
 #### Visualizations and Quantitative Metrics
+**PCA with 10 Features and Multinomial Logistic Regression**
+
+| Training Accuracy | 0.27445265604940844 |
+| Testing Accuracy | 0.2629493348429097 |
+| Testing Precision | 0.1880962119545255 |
+| Testing Recall | 0.17857835013413167 |
+| Testing F1 | 0.1521894843233517 |
+
+Confusion Matrix:
+
+![pca_mlr_cm](../images/pca_mlr_cm.png)
+
+**HOG and Multinomial Logistic Regression**
+
+| Training Accuracy | 0.45404392630373686 |
+| Testing Accuracy | 0.4167846023209737 |
+| Testing Precision | 0.36715607453645527 |
+| Testing Recall | 0.3498164155919157 |
+| Testing F1 | 0.35243930689142605 |
+
+Confusion Matrix:
+
+![hog_mlr_cm](../images/hog_mlr_cm.png)
+
 #### Analysis
 While this model is still under development, we do have some visual/qualitative metrics. It is clear that while both PCA and HOG data preprocessing methods are not perfect, HOG does show significant improvement over PCA. It does seem that for both models, the happy face was the most accurately predicted label with the highest number of true and predicted labels. However, it is clear that in addition to low accuracy, both models had low precision and recall. With more testing and tuning, hopefully all of these metrics can be improved especially when using MTCNN facial feature detection on the entire dataset.
 
