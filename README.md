@@ -7,3 +7,5 @@
 `code/hog_mlr.ipynb`: Development of multinomial logistic regression model with HOG and PCA data preprocessing methods. Trained on entire dataset.
 
 `code/tf_cnn.ipynb`: Development of CNN model.
+
+`code/TransferLearning.ipynb`: Development of a CNN model using transfer learning (Resnet-50)
