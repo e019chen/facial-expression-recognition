@@ -247,13 +247,6 @@ The transfer learning model performed slightly better than our model. Depending 
 
 
 ### Conclusion and Evaluation
-Currently, we have come up with a baseline CNN model and a baseline multinomial logistic regression model with various data preprocessing techniques. In addition to creating a third model, there is much tuning and learning that can be done using the existing two models.
-
-For the CNN model, we can try using a Keras pre-trained model to implement transfer learning since the pre-trained models have well-established model architectures and will potentially yield better results. We could also change the unbalanced dataset. For example, applying SMOTE or augmentation to upsample the images in minority classes or performing downsampling on majority classes. We can also play around with the different layers that we have chosen to try to come up with a better CNN model.
-
-For the multinomial logistic regression model, it would be a good idea to try applying the MTCNN data preprocessing to the entire dataset to see if this would lead to better results. Additionally, playing around with the parameters of the regression function as well as with the other data preprocessing methods may yield improved results as well. 
-
-Lastly, while we have now experimented with using a CNN for our data preprocessing, we should also continue to look into other methods that are completely free of a CNN to see how traditional machine learning algorithms/techniques compare to deep learning and CNN. While deep learning is more geared towards this application, it would be interesting to see the performance impact for the improvement in accuracy. 
 
 Our initial model built to discern “happy” and “sad” yielded promising results. Using MTCNN to extract the mouth and training on a small but balanced dataset, the logistic regression model had a 73.0% testing accuracy and SVM model had an even better result with 77.5% accuracy. After testing the waters with just two facial expressions, we were assured this was a feasible assignment and expanded our future models to discern all 7 other expressions. However, due to an unbalanced dataset, less data points, and the increased difficulty to discern more than three times the number of facial expressions, our future models did not perform as well. Using PCA with the 10 most significant features and multinomial regression yielded us 26.3% accuracy, 18.9% precision, 17.8% recall, and 15.2% F1 score. HOG and multinomial regression gave us better results, with a 41.7% testing accuracy, 36.7% precision, 35.0% recall, and 35.2% F1 Score. And as we predicted from our background research, CNN outperformed all of our other models. Using our own model, we had an accuracy of 44.0%, precision of 74.7%, recall of 17.9%, and F1 Score of 28.8%. Integrating Resnet-50 yielded the best results, with 59.6% accuracy, 74.2% precision, 41.8% recall, and 54.5% F1 Score.  
 
@@ -279,7 +272,7 @@ Our Gantt Chart can be found [here](https://github.com/e019chen/ML-Facial-Expres
 | ---- | ---------------------- |
 | Andrew G. | HOG Preprocessing, Multinomial Logistic Regression Model, Report Editing, Github Pages |
 | Andrew H. | Data Organizing, Report Documenting |
-| Chris | PCA Preprocessing, MTCNN Facial Feature Recognition, Logistic Regression Mode, Binary Classificationl |
+| Chris | PCA Preprocessing, MTCNN Facial Feature Recognition, Binary Classification (Logistic Regression, SVM, Cross Validation) |
 | Wei-Liang | CNN Model, Image Augmentation |
 | Euan | Gantt Chart, Report Documenting, Transfer Learning Model |
 
