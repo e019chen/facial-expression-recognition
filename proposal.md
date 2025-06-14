@@ -73,7 +73,7 @@ The following classification metrics will be used as defined in lecture:
 
 
 ## Gantt Chart
-Our Gantt Chart can be found [here](https://github.com/e019chen/ML-Facial-Expression-Recognition/blob/jekyll-integration/GanttChart.xlsx).
+Our Gantt Chart can be found [here](https://github.com/e019chen/facial-expression-recognition/blob/jekyll-integration/GanttChart.xlsx).
 
 
 ## Contribution Table
